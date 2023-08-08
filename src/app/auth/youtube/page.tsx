@@ -1,23 +1,28 @@
 'use client'
 
-import { gapi } from 'gapi-script';
+import { useSession, signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation';
+
 
 export default function YTLogin() {
+  const route = useRouter()
 
-  function loadClient() {
-    gapi.client.setApiKey(process.env.NEXT_PUBLIC_YT_api_key as string);
-    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-      .then(function () { console.log("GAPI client loaded for API"); },
-        function (err: any) { console.error("Error loading GAPI client for API", err); });
+  let codeVerifier = localStorage.getItem("code_verifier");
+  const urlParams = new URLSearchParams(window.location.search);
+
+  if (!codeVerifier) {
+    route.push('/auth/spotify')
+    return;
   }
 
-  function authenticate(e: React.FormEvent) {
-    e.preventDefault()
-    return gapi.auth.signIn({
-      clientid: process.env.NEXT_PUBLIC_YT_client_id,
-      scope: "https://www.googleapis.com/auth/youtube.force-ssl"
-    })
+  const { data: session } = useSession();
+
+  if (session && session.user) {
+    console.log(session.user)
+    // route.push('/yt-playlist')
   }
+
+
 
 
 
@@ -29,10 +34,9 @@ export default function YTLogin() {
             Log into your youtube music account
           </span>
           <button
-            onClick={(e) => authenticate(e)}
+            onClick={() => signIn()}
             title="login"
             type="submit"
-            id='customBtn'
             className="px-8 py-2 text-white text-lg font-medium bg-[#c3352e] hover:opacity-85 duration-300 transition-all rounded-2xl max-w-[10rem] mx-auto"
           >
             Login

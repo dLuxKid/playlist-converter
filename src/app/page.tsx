@@ -5,6 +5,7 @@ import { useStore } from "@/store/store";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
@@ -25,13 +26,15 @@ export default function Home() {
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  const router = useRouter()
+
   useEffect(() => {
     let codeVerifier = localStorage.getItem("code_verifier");
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get("code");
 
     if (!codeVerifier || !code) {
-      window.location.href = "http://localhost:3000/auth/spotify";
+      router.push("/auth/spotify")
       return;
     }
 
@@ -84,7 +87,7 @@ export default function Home() {
 
   const handleLogOut = () => {
     localStorage.clear();
-    window.location.href = "http://localhost:3000/login";
+    router.push("/auth/spotify")
     setModalMessage('Logged out')
   };
 

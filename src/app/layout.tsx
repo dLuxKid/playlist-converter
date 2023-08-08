@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import QueryProvider from "./QueryProvider";
 import "./globals.css";
-import GoogleAuthProvider from "./GoogleAuthProvider";
+import SessionProviders from "./SessionProviders";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <GoogleAuthProvider >
+    <SessionProviders>
       <QueryProvider>
         <html lang="en">
           <body className={`${inter.className}  bg-gray-700 relative`}>
@@ -27,6 +28,6 @@ export default function RootLayout({
           </body>
         </html>
       </QueryProvider>
-    </GoogleAuthProvider>
+    </SessionProviders>
   );
 }
