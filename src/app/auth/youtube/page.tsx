@@ -8,7 +8,6 @@ export default function YTLogin() {
   const route = useRouter()
 
   let codeVerifier = localStorage.getItem("code_verifier");
-  const urlParams = new URLSearchParams(window.location.search);
 
   if (!codeVerifier) {
     route.push('/auth/spotify')

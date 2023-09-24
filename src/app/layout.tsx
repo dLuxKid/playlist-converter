@@ -1,9 +1,8 @@
-import Modal from "@/components/Modal";
+import Toast from "@/components/Toast";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import QueryProvider from "./QueryProvider";
-import "./globals.css";
 import SessionProviders from "./SessionProviders";
+import "./globals.css";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,14 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <SessionProviders>
-      <QueryProvider>
-        <html lang="en">
-          <body className={`${inter.className}  bg-gray-700 relative`}>
-            {children}
-            <Modal />
-          </body>
-        </html>
-      </QueryProvider>
+      <html lang="en">
+        <body className={`${inter.className}  bg-gray-700 relative`}>
+          {children}
+          <Toast />
+        </body>
+      </html>
     </SessionProviders>
   );
 }
