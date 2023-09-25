@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 // code verifier
 function generateRandomString(length: number) {
@@ -32,9 +32,7 @@ async function generateCodeChallenge(codeVerifier) {
 }
 
 export default function Login() {
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleLogin = () => {
     let codeVerifier = generateRandomString(128);
 
     generateCodeChallenge(codeVerifier).then((codeChallenge) => {
@@ -58,18 +56,17 @@ export default function Login() {
 
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get("code");
-    console.log(code);
+    localStorage.setItem('code', code as string)
   };
 
   return (
     <div className="min-w-[250px] h-[100vh] w-full m-auto flex items-center justify-center">
-      <form>
+      <form action={handleLogin}>
         <label className="flex flex-col gap-4">
           <span className="text-xl font-bold text-white">
             Log into your spotify account
           </span>
           <button
-            onClick={handleLogin}
             title="login"
             type="submit"
             className="px-8 py-2 text-white text-lg font-medium bg-green-600 hover:opacity-85 duration-300 transition-all rounded-2xl max-w-[10rem] mx-auto"

@@ -1,26 +1,17 @@
 'use client'
 
-import { useStore } from "@/store/store";
+import { useGlobalContext } from "@/context/GlobalContext";
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "sonner";
 
 
-interface Props {
-    userPlaylists: any
-}
+export default function UserPlayList() {
 
-export default function UserPlayList({
-    userPlaylists,
-}: Props) {
+    const { userPlaylists, selectedPlaylist, setSelectedPlaylist } = useGlobalContext()
 
     const [playlistTracks, setPlayListTracks] = useState<any>(null);
-
     const [selectedPlaylistId, setSelectedPlaylistId] = useState<any>(null);
-
-    // store methods and values
-    const selectedPlaylist = useStore((state) => state.selectedPlaylist);
-    const setSelectedPlaylist = useStore((state) => state.setSelectedPlaylist);
-    const setModalMessage = useStore((state) => state.setModalMessage)
 
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -36,7 +27,7 @@ export default function UserPlayList({
         });
 
         if (response.status !== 200) {
-            setModalMessage("Error fetching songs");
+            toast.error("Error fetching songs");
             throw new Error("Network response was not ok");
         }
 
@@ -56,9 +47,9 @@ export default function UserPlayList({
     return (
         <div className="flex flex-col gap-y-5">
             {userPlaylists?.map((item: any, idx: number) => (
-                <div key={idx} className="flex gap-4 w-full">
+                <div key={idx} className="flex gap-3 w-full">
                     <span
-                        className={`border-green-600 border-2 h-4 w-4 rounded-full cursor-pointer mt-6 ml-4 ${selectedPlaylist &&
+                        className={`border-green-600 border-2 h-4 w-4 rounded-full cursor-pointer mt-6 ${selectedPlaylist &&
                             selectedPlaylistId === item.id &&
                             "bg-green-600 border-gray-800"
                             }`}

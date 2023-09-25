@@ -1,14 +1,30 @@
-export default function Navbar({
-  name,
-  handleLogOut,
-}: {
-  name: string;
-  handleLogOut: () => void;
-}) {
+'use client'
+
+import { useGlobalContext } from "@/context/GlobalContext";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+
+export default function Navbar() {
+  const { userProfile } = useGlobalContext()
+  const router = useRouter()
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    router.push("/auth/spotify")
+    toast.success('Logged out')
+  }
+
+  if (!userProfile) {
+    toast.message('refresh to login')
+    return null
+  }
+
+
   return (
     <nav className="w-full">
       <div className="flex justify-between items-center py-[2rem] px-[5%]">
-        <h1 className="text-xl font-semibold">hey {name}</h1>
+        <h1 className="text-xl font-semibold">hey {userProfile.display_name}</h1>
         <button
           onClick={handleLogOut}
           title="logout"

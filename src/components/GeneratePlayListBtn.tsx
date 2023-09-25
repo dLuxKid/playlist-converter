@@ -1,6 +1,14 @@
+'use client'
+
+import { useGlobalContext } from "@/context/GlobalContext";
 import Link from "next/link";
 
 export default function GeneratePlayListBtn() {
+
+    const { selectedPlaylist } = useGlobalContext()
+
+    if (!selectedPlaylist) return null
+
     return (
         <div className="flex justify-center items-center gap-4 mt-4">
             <button
