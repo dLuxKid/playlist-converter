@@ -3,18 +3,9 @@
 import { useGlobalContext } from '@/context/GlobalContext';
 import { useRouter } from 'next/navigation';
 import { useGoogleLogin } from '@react-oauth/google';
-// import { google } from 'googleapis';
 
 export default function YTLogin() {
   const route = useRouter()
-
-  // let codeVerifier = localStorage.getItem("code_verifier");
-
-  // const oauth2Client = new google.auth.OAuth2(
-  //   process.env.NEXT_PUBLIC_YT_client_id,
-  //   process.env.NEXT_PUBLIC_YT_client_secret,
-  //   process.env.NEXT_PUBLIC_YT_redirect_uri
-  // );
 
   const { selectedPlaylist } = useGlobalContext()
 
@@ -22,11 +13,6 @@ export default function YTLogin() {
     route.back()
     return;
   }
-
-  // if (!codeVerifier) {
-  //   route.push('/auth/spotify')
-  // }
-
 
   const signIn = useGoogleLogin({
     onSuccess: codeResponse => console.log(codeResponse),
