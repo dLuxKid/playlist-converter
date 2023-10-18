@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <nav className="w-full">
       <div className="flex justify-between items-center py-[2rem] px-[5%]">
-        <h1 className="text-xl font-semibold">hey {userProfile.display_name}</h1>
+        <h1 className="text-xl font-semibold text-white">hey {userProfile.display_name}</h1>
         <button
           onClick={handleLogOut}
           title="logout"

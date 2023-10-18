@@ -26,6 +26,7 @@ export default function RootLayout({
           <ContextProvider>
             {children}
             <Toaster
+              richColors
               position="top-right" closeButton={true}
               duration={2500}
             />
