@@ -10,7 +10,8 @@ const GlobalContext = createContext<any>({});
 const ContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [userProfile, setUserProfile] = useState<any>(null);
   const [userPlaylists, setUserPlaylists] = useState<any>(null);
-  const [selectedPlaylist, setSelectedPlaylist] = useState<any>();
+  const [selectedPlaylist, setSelectedPlaylist] = useState<any>(null);
+  const [shuffledPlaylist, setShuffledPlaylist] = useState<any>(null);
 
   const [error, setError] = useState<string>("");
 
@@ -88,6 +89,8 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
         setUserProfile,
         selectedPlaylist,
         setSelectedPlaylist,
+        shuffledPlaylist,
+        setShuffledPlaylist,
       }}
     >
       {children}

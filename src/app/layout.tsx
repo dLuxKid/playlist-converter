@@ -7,8 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "spotify to yt",
-  description: "It should convert your spotify playlists to youtube playlist",
+  title: "shuffle your playlist",
 };
 
 export default function RootLayout({

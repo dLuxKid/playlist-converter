@@ -1,5 +1,6 @@
 import FetchUserPlaylistsBtn from "@/components/FetchUserPlaylistsBtn";
 import Navbar from "@/components/Navbar";
+import ShowShuffledPlaylist from "@/components/ShowShuffledPlaylist";
 import ShuffleBtn from "@/components/ShuffleBtn";
 import UserPlayList from "@/components/UserPlayList";
 
@@ -11,6 +12,7 @@ export default function Home() {
         <FetchUserPlaylistsBtn />
         <UserPlayList />
         <ShuffleBtn />
+        <ShowShuffledPlaylist />
       </div>
     </main>
   );

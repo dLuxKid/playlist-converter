@@ -2,13 +2,17 @@
 
 import { useGlobalContext } from "@/context/GlobalContext";
 import axios from "axios";
-import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
+import SongList from "./SongList";
 
 export default function UserPlayList() {
-  const { userPlaylists, selectedPlaylist, setSelectedPlaylist } =
-    useGlobalContext();
+  const {
+    userPlaylists,
+    selectedPlaylist,
+    setSelectedPlaylist,
+    setShuffledPlaylist,
+  } = useGlobalContext();
 
   const [playlistTracks, setPlayListTracks] = useState<any>(null);
   const [selectedPlaylistId, setSelectedPlaylistId] = useState<any>(null);
@@ -33,14 +37,28 @@ export default function UserPlayList() {
     setPlayListTracks(response.data.items);
   };
 
-  const handleSelectedPlaylist = (item: any) => {
+  const handleSelectedPlaylist = async (item: any) => {
+    setSelectedPlaylist(null);
+    setShuffledPlaylist(null);
     if (selectedPlaylistId === item.id) {
       setSelectedPlaylistId(null);
-      setSelectedPlaylist(null);
       return;
     }
     setSelectedPlaylistId(item.id);
-    setSelectedPlaylist(item);
+
+    let accessToken = localStorage.getItem("access_token");
+
+    const response = await axios.get(item.href, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    });
+
+    if (response.status !== 200) {
+      return toast.error("Error fetching songs");
+    }
+
+    setSelectedPlaylist(response.data.tracks.items);
   };
 
   return (
@@ -93,26 +111,7 @@ export default function UserPlayList() {
               {playlistTracks &&
                 activeIndex === idx &&
                 playlistTracks.map((item: any, idx: number) => (
-                  <div
-                    key={idx}
-                    className="w-full flex flex-wrap items-center justify-start border border-white text-white rounded-2xl p-2"
-                  >
-                    {item.track ? (
-                      <>
-                        <p className="mr-2">{item.track.name || ""}</p>
-                        by
-                        <span className="flex flex-wrap">
-                          {item.track.artists?.map((i: any, idx: number) => (
-                            <p key={idx} className="ml-1">
-                              {i.name}{" "}
-                            </p>
-                          ))}
-                        </span>
-                      </>
-                    ) : (
-                      <p className="text-red-600">Error with song</p>
-                    )}
-                  </div>
+                  <SongList key={idx} item={item} />
                 ))}
             </div>
           </div>
