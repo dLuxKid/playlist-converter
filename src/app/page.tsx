@@ -1,7 +1,6 @@
-// components
 import FetchUserPlaylistsBtn from "@/components/FetchUserPlaylistsBtn";
-import GeneratePlayListBtn from "@/components/GeneratePlayListBtn";
 import Navbar from "@/components/Navbar";
+import ShuffleBtn from "@/components/ShuffleBtn";
 import UserPlayList from "@/components/UserPlayList";
 
 export default function Home() {
@@ -11,7 +10,7 @@ export default function Home() {
       <div className="w-full py-[2rem] px-6 md:px-[5%]">
         <FetchUserPlaylistsBtn />
         <UserPlayList />
-        <GeneratePlayListBtn />
+        <ShuffleBtn />
       </div>
     </main>
   );

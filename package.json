@@ -1,5 +1,5 @@
 {
-  "name": "spotify-to-ytmusic-app",
+  "name": "spotify-playlist-shuffler",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-oauth/google": "^0.11.1",
     "@types/node": "20.4.4",
     "@types/react": "18.2.16",
     "@types/react-dom": "18.2.7",
@@ -17,10 +16,6 @@
     "axios": "^1.4.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
-    "google-auth-library": "^9.0.0",
-    "googleapis": "^126.0.1",
-    "http2": "^3.3.7",
-    "jwt-decode": "^3.1.2",
     "net": "^1.0.2",
     "next": "13.4.12",
     "next-auth": "^4.22.4",

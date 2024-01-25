@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 // code verifier
 function generateRandomString(length: number) {
@@ -56,16 +56,16 @@ export default function Login() {
 
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get("code");
-    localStorage.setItem('code', code as string)
+    localStorage.setItem("code", code as string);
   };
 
   return (
     <div className="min-w-[250px] h-[100vh] w-full m-auto flex items-center justify-center">
       <form action={handleLogin}>
         <label className="flex flex-col gap-4">
-          <span className="text-xl font-bold text-white">
+          <p className="text-xl font-bold text-white">
             Log into your spotify account
-          </span>
+          </p>
           <button
             title="login"
             type="submit"
