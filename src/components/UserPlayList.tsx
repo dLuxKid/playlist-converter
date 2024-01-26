@@ -12,6 +12,7 @@ export default function UserPlayList() {
     selectedPlaylist,
     setSelectedPlaylist,
     setShuffledPlaylist,
+    setSelectedPlaylistName,
   } = useGlobalContext();
 
   const [playlistTracks, setPlayListTracks] = useState<any>(null);
@@ -57,6 +58,8 @@ export default function UserPlayList() {
     if (response.status !== 200) {
       return toast.error("Error fetching songs");
     }
+
+    setSelectedPlaylistName(response.data.name);
 
     setSelectedPlaylist(response.data.tracks.items);
   };

@@ -2,9 +2,12 @@
 
 import { useGlobalContext } from "@/context/GlobalContext";
 import SongList from "./SongList";
+import { useState } from "react";
 
 export default function ShowShuffledPlaylist() {
   const { shuffledPlaylist, setShuffledPlaylist } = useGlobalContext();
+  const [showShuffledPlaylist, setShowShuffledPlaylist] =
+    useState<boolean>(false);
 
   if (!shuffledPlaylist) return null;
   return (
@@ -14,16 +17,26 @@ export default function ShowShuffledPlaylist() {
           Here is your shuffled playlist below
         </h1>
 
-        <span
-          className="h-8 w-8 rounded-full cursor-pointer bg-red-600 text-white flex items-center justify-center text-base font-bold"
-          onClick={() => setShuffledPlaylist(null)}
-        >
-          X
-        </span>
+        <div className="flex gap-2 items-center">
+          <span
+            className="h-8 w-8 rounded-full cursor-pointer bg-red-600 text-white flex items-center justify-center text-base font-bold"
+            onClick={() => setShuffledPlaylist(null)}
+          >
+            X
+          </span>
+          <span
+            onClick={() => setShowShuffledPlaylist((prev) => !prev)}
+            className="h-8 w-8 rounded-full cursor-pointer bg-red-600 text-white flex items-center justify-center text-base font-bold"
+          >
+            v
+          </span>
+        </div>
       </div>
-      {shuffledPlaylist.map((item: any, idx: number) => (
-        <SongList key={idx} item={item} />
-      ))}
+
+      {showShuffledPlaylist &&
+        shuffledPlaylist.map((item: any, idx: number) => (
+          <SongList key={idx} item={item} />
+        ))}
     </div>
   );
 }
